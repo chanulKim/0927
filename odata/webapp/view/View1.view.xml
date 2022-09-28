@@ -1,0 +1,69 @@
+<mvc:View controllerName="odata.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <HBox>
+                <Input id="soId" value="{view>/salesOrderNum}"/> 
+                <Input id="soMemo" value="{view>/salesOrderMemo}" />
+                <Button text="저장" press = "onCreate"/>
+                <Button text="변경" press = "onUpdate"/>
+                <Button text="수정모드" press="onPressEdit" />
+                <Button text="삭제모드" press="onPressDel" />
+            </HBox>
+            
+            <Table id="table"
+                inset="false"
+                items="{
+                    path: '/SalesOrderSet' 
+                }"
+                mode = "Delete"
+                delete = "onDelete"
+                selectionChange="onPressItem" >
+
+<!-- selectionChange : 테이블 행을 선택하면 함수 실행  -->
+
+        <headerToolbar>
+            <OverflowToolbar>
+                <content>
+                    <Title text="Products" level="H2"/>
+                    <ToolbarSpacer/>
+                    
+                    <Button  text="새로고침" icon="sap-icon://refresh"
+                        press="onRefresh" />
+                    
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column>
+                <Text text="판매오더 번호" />
+            </Column>
+            <Column>
+                <Text text="메모" />
+            </Column>
+            <Column>
+                <Text text="수정일" />
+            </Column>
+            <Column>
+                <Text text="수정시간" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier
+                        title="{Sonum}"/>
+                    <Text
+                        text="{Memo}" />
+                    <Text
+                        text="{Erdat}" />
+                    <Text
+                        text="{ path: 'Erzet', type: 'sap.ui.model.odata.type.Time'}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+        </content>
+    </Page>
+</mvc:View>
